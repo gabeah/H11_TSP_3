@@ -19,7 +19,7 @@ void mutate() {
 	int rand_pt = random_gen(0,order_.size()-1);
 
 	Chromosome* mutate1 = this->clone();
-	Chromosome* mutate2 = this->clone()
+	Chromosome* mutate3 = this->clone();
 
 	if(rand_pt==0){
 		std::swap(mutate1->order_.begin(), mutate1->order_.end());	
