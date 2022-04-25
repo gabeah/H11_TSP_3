@@ -5,10 +5,10 @@ OBJ=$(SRC:.cc=.o)
 
 all:  tsp tsp_climbed
 
-tsp: tsp.o chromosome.o deme.o cities.o
+tsp: tsp.o chromosome.o deme.o cities.o climb_chromosome.o
 	$(CXX) $(LDFLAGS) -o $@ $^
 
-tsp_climbed: tsp.o climb_chromosome.o deme.o cities.o chromosome.o
+tsp_climbed: tsp.o deme.o cities.o chromosome.o climb_chromosome.o 
 	$(CXX) $(LDFLAGS) -o $@ $^
 %.o: %.cc %.hh
 	$(CXX) $(CXXFLAGS) $(OPTFLAGS) -c -o $@ $<

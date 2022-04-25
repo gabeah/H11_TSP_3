@@ -3,9 +3,10 @@
  * travelling-salesperson problem.  A deme is a population of individuals.
  */
 
-#include "chromosome.hh"
 #include "deme.hh"
 #include <cassert>
+#include "climb_chromosome.hh"
+
 
 // Generate a Deme of the specified size with all-random chromosomes.
 // Also receives a mutation rate in the range [0-1].
@@ -18,7 +19,7 @@ Deme::Deme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
     for(size_t u = 0; u < pop_size; ++ u){
 	
 	// Create a bunch of new chromosomes and add to our group
-        Chromosome* ch1 = new Chromosome(cities_ptr);
+        Chromosome* ch1 = new ClimbChromosome(cities_ptr);
         pop_.push_back(ch1);
 
     }

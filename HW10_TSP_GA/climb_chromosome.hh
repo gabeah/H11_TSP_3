@@ -6,12 +6,18 @@
 class ClimbChromosome: public Chromosome {
 
 public:
-	Chromosome* clone() {
-	
-	}	
+	ClimbChromosome(const Cities* cities_ptr)
+		:Chromosome(cities_ptr){}
 
-	void mutate();
-private:
+	~ClimbChromosome();
 
-}
+	virtual Chromosome* clone() const override;	
+
+	virtual void mutate() override;
+
+	void rearrange(size_t  index, bool direction);
+
+	void best_fit(double og, double m1, double m2, size_t index);
+
+};
 

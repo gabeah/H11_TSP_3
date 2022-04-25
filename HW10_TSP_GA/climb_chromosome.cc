@@ -2,38 +2,65 @@
 // Climb Chromosome
 
 #include "climb_chromosome.hh"
+#include <cassert>
+#include <algorithm>
 
-Chromosome* best_fit(Chromosome* og, Chromosome* m1, Chromosome* m2){
-	double og_fit = og->get_fitness();
-	double m1_fit = m1->get_fitness();
-	double m2_fit = m2->get_fitness();
+Chromosome* ClimbChromosome::clone() const
+{
+   return new ClimbChromosome(cities_ptr_);
+}
 
-	if (og_fit >= m1_fit && og_fit >= m2_fit) return og;
-	else if (m1_fit >= og_fit && m1_fit >= m2_fit) return m1;
-	else if (m2_fit >= og_fit && m2_fit >= m1_fit) return m2;
+
+void ClimbChromosome::rearrange(size_t index, bool direction){
+	if(direction){
+	
+		if(index==0){
+			std::swap(order_[0], order_[order_.size()-1]);	
+		}
+		else{
+			std::swap(order_[index], order_[index-1]);
+		}
+
+	}
+	else{
+	
+		if(index == order_.size()-1) {
+			std::swap(order_[0], order_[order_.size()-1]);
+		}
+		else{
+			std::swap(order_[index], order_[index+1]);
+		}
+
+	}
+}
+
+void ClimbChromosome::best_fit(double og, double m1, double m2, size_t index){
+
+	if (og >= m1 && og >= m2) {}
+	else if (m1 >= og && m1 >= m2) {rearrange(index, true);}
+	else if (m2 >= og && m2 >= m1) {rearrange(index,false);}
 	else assert(false);
 }
 
-void mutate() {
-	doublr curr_fitness = this->get_fitness();
+void ClimbChromosome::mutate() {
+	double curr_fitness = this->get_fitness();
 	int rand_pt = random_gen(0,order_.size()-1);
 
-	Chromosome* mutate1 = this->clone();
-	Chromosome* mutate3 = this->clone();
+	//Backward swap
+	rearrange(rand_pt, true);
 
-	if(rand_pt==0){
-		std::swap(mutate1->order_.begin(), mutate1->order_.end());	
-	}
-	else{
-		std::swap(mutate1->order_[rand_pt], mutate1->order_[rand_pt-1]);
-	}
-	
-	if(rand_pt == order_.size()-1) {
-		std::swap(mutate2->order_.end(), mutate2->order_.begin());
-	}
-	else{
-		std::swap(mutate2->order_[rand_pt], mutate2->order[rand_pt+1]);
-	}
+	double back_fit = this->get_fitness();
 
-	Chromosome* best_chrom = best_fit(this, mutate1, mutate2);
+	rearrange(rand_pt, true);
+
+	//Forward swap
+	rearrange(rand_pt, false);
+
+	double front_fit = this->get_fitness();
+
+	rearrange(rand_pt, false);
+
+	best_fit(curr_fitness, back_fit, front_fit, rand_pt);
 }
+
+
