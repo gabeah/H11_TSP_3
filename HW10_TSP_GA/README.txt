@@ -1,5 +1,16 @@
 //Daniel Kryzhanovsky and Gabe Howland
 
+COMPILE:
+Make file included, run make command
+
+We ran program with population size 100 and mutation rate 0.5
+
+TO RUN PROGRAM:
+use following command
+$ ./tsp challenge.tsv 100 0.5
+
+it will output to a file called "output_tournament.tsv"
+
 METHOD:
 
 ///////////////////////////////////////////////////////////////////////////////
