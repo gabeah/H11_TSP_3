@@ -1,0 +1,6 @@
+//Daniel Kryzhanovsky and Gabe Howland
+
+METHOD:
+
+///////////////////////////////////////////////////////////////////////////////
+Climb Chromosome: For climb chromosome, we started off by initializing the constructor and deconstructor of the inhertied class, while also implementing the original's mutate and clone class, since that's all we are changing for this class. We also created the best_fit and rearange class, helper functions that allow us to find the best fit among three chromosmes and rearange the order of the chromosome's indexs respectifully. To implement these functions, we had rearange swap the beginning and end of the specific chromsome to calculate its total fitness. Best_fit just compares the 3 individual chromosomes to see which one has a higher fitness. To clone the chromosme, we had it so it clones the chromosome from the climb chromosome class. In order to even check the best fitness in mutate, we find the index of the original, second(front), and third(back) chromosome to go through all of their indexs and find their fitnesses. At the end of Climb, all we do is compare the 3 chromosomes and choose the one with the highest fitness.
