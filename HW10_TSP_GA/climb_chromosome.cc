@@ -7,7 +7,7 @@
 
 Chromosome* ClimbChromosome::clone() const
 {
-   return new ClimbChromosome(cities_ptr_);
+   return new ClimbChromosome(*this);
 }
 
 

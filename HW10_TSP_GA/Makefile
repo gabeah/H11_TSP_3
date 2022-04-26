@@ -3,13 +3,11 @@ CXXFLAGS=-Wall -Wextra -pedantic -std=c++17 -O0 -g
 LDFLAGS=$(CXXFLAGS)
 OBJ=$(SRC:.cc=.o)
 
-all:  tsp tsp_climbed
+all:  tsp
 
-tsp: tsp.o chromosome.o deme.o cities.o climb_chromosome.o
+tsp: tsp.o chromosome.o deme.o cities.o climb_chromosome.o tournament_deme.o
 	$(CXX) $(LDFLAGS) -o $@ $^
 
-tsp_climbed: tsp.o deme.o cities.o chromosome.o climb_chromosome.o 
-	$(CXX) $(LDFLAGS) -o $@ $^
 %.o: %.cc %.hh
 	$(CXX) $(CXXFLAGS) $(OPTFLAGS) -c -o $@ $<
 
