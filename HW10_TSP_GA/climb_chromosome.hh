@@ -9,7 +9,7 @@ public:
 	ClimbChromosome(const Cities* cities_ptr)
 		:Chromosome(cities_ptr){}
 
-	~ClimbChromosome();
+	virtual ~ClimbChromosome() {};
 
 	virtual Chromosome* clone() const override;	
 
