@@ -12,14 +12,14 @@
 
 #include "cities.hh"
 #include <random>
-#include <set>
 
 class Chromosome {
+ protected:
    // Disable public copying of objects for polymorphism:
-  Chromosome(const Chromosome&) = delete;
-  Chromosome(Chromosome&&) = delete;
-  Chromosome& operator=(const Chromosome&) = delete;
-  Chromosome& operator=(Chromosome&&) = delete;
+  Chromosome(const Chromosome&) = default;
+  Chromosome(Chromosome&&) = default;
+  Chromosome& operator=(const Chromosome&) = default;
+  Chromosome& operator=(Chromosome&&) = default;
 
  public:
   // Creation method for new Chromsomoe. Saves a copy of the cities and
@@ -31,7 +31,7 @@ class Chromosome {
   // It is the caller's responsibility to free this memory.
   virtual Chromosome* clone() const
   {
-    return new Chromosome(cities_ptr_);
+    return new Chromosome(*this);
   }
 
   // Clean up as necessary
@@ -61,10 +61,6 @@ class Chromosome {
   {
     return order_;
   }
-
-  using perm_options_t = std::set<unsigned int>;
-
-  double random_gen(double from, double to);
 
  protected:
   // For an ordered set of parents, return a child using the ordered crossover.
